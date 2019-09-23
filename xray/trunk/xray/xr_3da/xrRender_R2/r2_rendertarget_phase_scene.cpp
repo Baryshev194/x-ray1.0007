@@ -4,7 +4,7 @@
 void	CRenderTarget::phase_scene_prepare	()
 {
 	// KD: we need to clean up G-buffer every frame to avoid "ghosting" on sky
-	u_setrt	( rt_Position, rt_Normal, rt_Color, 0 );
+	u_setrt	( rt_Position, rt_Normal, rt_Color, rt_Wetness, 0 );
 	CHK_DX	( HW.pDevice->Clear	( 0L, NULL, D3DCLEAR_TARGET, 0x0, 1.0f, 0L) );
 
 	// Clear depth & stencil
@@ -20,8 +20,8 @@ void	CRenderTarget::phase_scene_begin	()
 		CHK_DX(HW.pDevice->SetSamplerState( i, D3DSAMP_MAXANISOTROPY, ps_r__tf_Anisotropic	));
 
 	// Targets, use accumulator for temporary storage
-	if (RImplementation.o.albedo_wo)	u_setrt		(rt_Position,	rt_Normal,	rt_Accumulator,	HW.pBaseZB);
-	else								u_setrt		(rt_Position,	rt_Normal,	rt_Color,		HW.pBaseZB);
+	if (RImplementation.o.albedo_wo)	u_setrt		(rt_Position,	rt_Normal,	rt_Accumulator, rt_Wetness,	HW.pBaseZB);
+	else								u_setrt		(rt_Position,	rt_Normal,	rt_Color, rt_Wetness,		HW.pBaseZB);
 
 	// Stencil - write 0x1 at pixel pos
 	RCache.set_Stencil					( TRUE,D3DCMP_ALWAYS,0x01,0xff,0xff,D3DSTENCILOP_KEEP,D3DSTENCILOP_REPLACE,D3DSTENCILOP_KEEP);
@@ -47,7 +47,7 @@ void	CRenderTarget::phase_scene_end		()
 	if (!RImplementation.o.albedo_wo)		return;
 
 	// transfer from "rt_Accumulator" into "rt_Color"
-	u_setrt								( rt_Color,	0,	0,	HW.pBaseZB	);
+	u_setrt								( rt_Color,	0,	0,0,	HW.pBaseZB	);
 	RCache.set_CullMode					( CULL_NONE );
 	RCache.set_Stencil					(TRUE,D3DCMP_LESSEQUAL,0x01,0xff,0x00);	// stencil should be >= 1
 	if (RImplementation.o.nvstencil)	u_stencil_optimize	(FALSE);

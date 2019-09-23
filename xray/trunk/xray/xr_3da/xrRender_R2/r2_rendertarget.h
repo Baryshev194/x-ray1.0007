@@ -45,6 +45,7 @@ public:
 	ref_rt						rt_Color;			// 64/32bit,fat	(r,g,b,specular-gloss)	(or decompressed MET-8-8-8-8)
 
 	// EXT
+	ref_rt rt_Wetness;
 	ref_rt rt_SSLR_0;
 	ref_rt rt_SSLR_1;
 
@@ -160,7 +161,7 @@ public:
 	void						u_stencil_optimize		(BOOL		common_stencil=TRUE);
 	void						u_compute_texgen_screen	(Fmatrix&	dest);
 	void						u_compute_texgen_jitter	(Fmatrix&	dest);
-	void						u_setrt					(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb);
+	void						u_setrt					(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, const ref_rt& _4, IDirect3DSurface9* zb);
 	void						u_setrt					(u32 W, u32 H, IDirect3DSurface9* _1, IDirect3DSurface9* _2, IDirect3DSurface9* _3, IDirect3DSurface9* zb);
 	void						u_calc_tc_noise			(Fvector2& p0, Fvector2& p1);
 	void						u_calc_tc_duality_ss	(Fvector2& r0, Fvector2& r1, Fvector2& l0, Fvector2& l1);

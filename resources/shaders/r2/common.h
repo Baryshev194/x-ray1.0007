@@ -172,6 +172,7 @@ struct                  f_deffer        		{
         half4           position        		: COLOR0;        // px,py,pz, m-id
         half4           Ne                		: COLOR1;        // nx,ny,nz, hemi
         half4       	C                		: COLOR2;        // r, g, b,  gloss
+		half4 Wetness:COLOR3; // r - puddles, gba - null
 };
 //////////////////////////////////////////////////////////////////////////////////////////
 struct  				p_screen                {

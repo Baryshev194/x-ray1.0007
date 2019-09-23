@@ -27,7 +27,7 @@ void	CRenderTarget::phase_luminance()
 	CHK_DX									(HW.pDevice->SetRenderState	(D3DRS_ZENABLE,FALSE));
 
 	// 000: Perform LUM-SAT, pass 0, 256x256 => 64x64
-	u_setrt									(rt_LUM_64,NULL,NULL,NULL);
+	u_setrt									(rt_LUM_64,NULL,NULL,NULL,NULL);
 	{
 		float		ts				= 64;
 		float		_w				= float(BLOOM_size_X);
@@ -56,7 +56,7 @@ void	CRenderTarget::phase_luminance()
 	}
 
 	// 111: Perform LUM-SAT, pass 1, 64x64 => 8x8
-	u_setrt									(rt_LUM_8,NULL,NULL,NULL);
+	u_setrt									(rt_LUM_8,NULL,NULL,NULL,NULL);
 	{
 		// Build filter-kernel
 		float		_ts				= 8;
@@ -87,7 +87,7 @@ void	CRenderTarget::phase_luminance()
 
 	// 222: Perform LUM-SAT, pass 2, 8x8 => 1x1
 	u32			gpu_id	= Device.dwFrame%2;
-	u_setrt		(rt_LUM_pool[gpu_id*2+1],NULL,NULL,NULL);
+	u_setrt		(rt_LUM_pool[gpu_id*2+1],NULL,NULL,NULL,NULL);
 	{
 		// Build filter-kernel
 		float		_ts				= 1;

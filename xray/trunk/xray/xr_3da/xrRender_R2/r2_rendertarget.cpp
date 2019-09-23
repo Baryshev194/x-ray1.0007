@@ -15,7 +15,7 @@
 
 const u32 extra_textures = 1;
 
-void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb)
+void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, const ref_rt& _4, IDirect3DSurface9* zb)
 {
 	VERIFY									(_1);
 	dwWidth									= _1->dwWidth;
@@ -23,6 +23,10 @@ void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt&
 	if (_1) RCache.set_RT(_1->pRT,	0); else RCache.set_RT(NULL,0);
 	if (_2) RCache.set_RT(_2->pRT,	1); else RCache.set_RT(NULL,1);
 	if (_3) RCache.set_RT(_3->pRT,	2); else RCache.set_RT(NULL,2);
+
+	// EXT
+	if (_4) RCache.set_RT(_4->pRT, 3); else RCache.set_RT(NULL,3);
+
 	RCache.set_ZB							(zb);
 //	RImplementation.rmNormal				();
 }
@@ -219,6 +223,9 @@ CRenderTarget::CRenderTarget		()
 		rt_Position.create			(r2_RT_P,		w,h,D3DFMT_A16B16G16R16F);
 		rt_Normal.create			(r2_RT_N,		w,h,D3DFMT_A16B16G16R16F);
 
+		// EXT
+		rt_Wetness.create(r2_RT_Wetness,w,h,D3DFMT_A8R8G8B8);
+
 		// select albedo & accum
 		if (RImplementation.o.mrtmixdepth)	
 		{
@@ -327,7 +334,7 @@ CRenderTarget::CRenderTarget		()
 			string256					name;
 			sprintf						(name,"%s_%d",	r2_RT_luminance_pool,it	);
 			rt_LUM_pool[it].create		(name,	1,	1,	D3DFMT_R32F				);
-			u_setrt						(rt_LUM_pool[it],	0,	0,	0			);
+			u_setrt						(rt_LUM_pool[it],	0,	0,	0,0			);
 			CHK_DX						(HW.pDevice->Clear( 0L, NULL, D3DCLEAR_TARGET,	0x7f7f7f7f,	1.0f, 0L));
 		}
 		u_setrt						( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);

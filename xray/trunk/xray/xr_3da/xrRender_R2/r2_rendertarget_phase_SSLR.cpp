@@ -18,7 +18,7 @@ void CRenderTarget::phase_SSLR()
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	// phase SSLR
-	u_setrt(rt_SSLR_0, 0, 0, HW.pBaseZB);
+	u_setrt(rt_SSLR_0, 0, 0, 0, HW.pBaseZB);
 	RCache.set_CullMode(CULL_NONE);
 	RCache.set_Stencil(FALSE);
 
@@ -56,7 +56,7 @@ void CRenderTarget::phase_SSLR()
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	// hblur
-	u_setrt(rt_SSLR_1, 0, 0, HW.pBaseZB);
+	u_setrt(rt_SSLR_1, 0, 0, 0, HW.pBaseZB);
 	RCache.set_CullMode(CULL_NONE);
 	RCache.set_Stencil(FALSE);
 
@@ -91,7 +91,7 @@ void CRenderTarget::phase_SSLR()
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	// vblur
-	u_setrt(rt_SSLR_0, 0, 0, HW.pBaseZB);
+	u_setrt(rt_SSLR_0, 0, 0, 0, HW.pBaseZB);
 	RCache.set_CullMode(CULL_NONE);
 	RCache.set_Stencil(FALSE);
 

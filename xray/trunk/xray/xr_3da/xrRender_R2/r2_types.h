@@ -7,6 +7,7 @@
 #define		r2_RT_albedo		"$user$albedo"			// MRT
 
 // EXT
+#define r2_RT_Wetness "$user$wetness"
 #define r2_RT_SSLR0 "$user$SSLR0"
 #define r2_RT_SSLR1 "$user$SSLR1"
 

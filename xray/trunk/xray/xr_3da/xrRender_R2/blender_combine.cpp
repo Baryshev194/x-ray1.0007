@@ -35,6 +35,7 @@ void	CBlender_combine::Compile(CBlender_Compile& C)
 		C.r_Sampler_clf		("s_bloom",			r2_RT_bloom1);
 		C.r_Sampler_clf		("s_distort",		r2_RT_generic1);
 		C.r_Sampler_clf("s_SSLR", r2_RT_SSLR0);
+		C.r_Sampler_clf("s_wetness", r2_RT_Wetness);
 		C.r_End				();
 		break;
 	case 2:	// non-AA
@@ -45,6 +46,7 @@ void	CBlender_combine::Compile(CBlender_Compile& C)
 		C.r_Sampler_clf		("s_bloom",			r2_RT_bloom1);
 		C.r_Sampler_clf		("s_distort",		r2_RT_generic1);
 		C.r_Sampler_clf("s_SSLR", r2_RT_SSLR0);
+		C.r_Sampler_clf("s_wetness", r2_RT_Wetness);
 		C.r_End				();
 		break;
 	case 3:	// aa-edge-detection + AA :) + DISTORTION
@@ -55,6 +57,7 @@ void	CBlender_combine::Compile(CBlender_Compile& C)
 		C.r_Sampler_clf		("s_bloom",			r2_RT_bloom1);
 		C.r_Sampler_clf		("s_distort",		r2_RT_generic1);
 		C.r_Sampler_clf("s_SSLR", r2_RT_SSLR0);
+		C.r_Sampler_clf("s_wetness", r2_RT_Wetness);
 		C.r_End				();
 		break;
 	case 4:	// non-AA + DISTORTION
@@ -65,6 +68,7 @@ void	CBlender_combine::Compile(CBlender_Compile& C)
 		C.r_Sampler_clf		("s_bloom",			r2_RT_bloom1);
 		C.r_Sampler_clf		("s_distort",		r2_RT_generic1);
 		C.r_Sampler_clf("s_SSLR", r2_RT_SSLR0);
+		C.r_Sampler_clf("s_wetness", r2_RT_Wetness);
 		C.r_End				();
 		break;
 	case 5:	// post-processing
