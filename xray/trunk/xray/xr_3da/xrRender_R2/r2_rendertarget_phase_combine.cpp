@@ -158,6 +158,9 @@ void	CRenderTarget::phase_combine	()
 	BOOL	PP_Complex		= u_need_PP	();
 	if (_menu_pp)			PP_Complex	= FALSE;
 
+	// EXT
+	phase_SSLR();
+
 	// Combine everything + perform AA
 	if		(PP_Complex)	u_setrt		( rt_Color,0,0,HW.pBaseZB );			// LDR RT
 	else					u_setrt		( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);

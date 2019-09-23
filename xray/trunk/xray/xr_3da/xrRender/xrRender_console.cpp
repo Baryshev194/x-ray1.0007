@@ -109,6 +109,9 @@ int			ps_r2_wait_sleep			= 0;
 float		ps_r2_lt_smooth				= 1.f;				// 1.f
 float		ps_r2_slight_fade			= 1.f;				// 1.f
 
+// EXT
+float ps_ext_SSLR_L = 1.f;
+
 // KD start
 Flags32		ps_common_flags				= { 0 };		// r1-only
 u32			ps_steep_parallax			= 0;
@@ -440,6 +443,9 @@ void		xrRender_initconsole	()
 
 	tw_min.set			(0,0,0);	tw_max.set	(1,1,1);
 	CMD4(CCC_Vector3,	"r2_aa_weight",			&ps_r2_aa_weight,			tw_min, tw_max	);
+
+	// EXT
+	CMD4(CCC_Float, "ext_SSLR_L", &ps_ext_SSLR_L, .1f, 10.f);
 
 	// KD
 	CMD3(CCC_Mask,			"r__bloodmarks",		&ps_common_flags,			RFLAG_BLOODMARKS);

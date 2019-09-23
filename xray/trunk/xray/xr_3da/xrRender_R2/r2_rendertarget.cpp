@@ -10,6 +10,9 @@
 #include "blender_bloom_build.h"
 #include "blender_luminance.h"
 
+// EXT
+#include "blender_SSLR.h"
+
 const u32 extra_textures = 1;
 
 void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb)
@@ -207,6 +210,9 @@ CRenderTarget::CRenderTarget		()
 	b_luminance						= xr_new<CBlender_luminance>			();
 	b_combine						= xr_new<CBlender_combine>				();
 
+	// EXT
+	b_SSLR = xr_new<CBlender_SSLR>();
+
 	//	NORMAL
 	{
 		u32		w=Device.dwWidth, h=Device.dwHeight;
@@ -325,6 +331,17 @@ CRenderTarget::CRenderTarget		()
 			CHK_DX						(HW.pDevice->Clear( 0L, NULL, D3DCLEAR_TARGET,	0x7f7f7f7f,	1.0f, 0L));
 		}
 		u_setrt						( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
+	}
+
+	// EXT
+	{
+		//
+		u32 fvf_SQ = D3DFVF_XYZRHW|D3DFVF_TEX1|D3DFVF_TEXCOORDSIZE2(0);
+		g_SQ.create(fvf_SQ, RCache.Vertex.Buffer(), RCache.QuadIB);
+
+		// SSLR
+		rt_SSLR_0.create(r2_RT_SSLR0, Device.dwWidth, Device.dwHeight, D3DFMT_A8R8G8B8);
+		s_SSLR.create(b_SSLR, "r2\\SSLR");
 	}
 
 	// COMBINE
@@ -521,4 +538,7 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_accum_direct			);
 	xr_delete					(b_accum_mask			);
 	xr_delete					(b_occq					);
+
+	// EXT
+	xr_delete(b_SSLR);
 }

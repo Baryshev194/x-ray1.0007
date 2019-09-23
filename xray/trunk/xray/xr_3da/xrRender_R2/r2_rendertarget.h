@@ -25,6 +25,9 @@ public:
 	IBlender*					b_bloom;
 	IBlender*					b_luminance;
 	IBlender*					b_combine;
+
+	// EXT
+	IBlender* b_SSLR;
 #ifdef DEBUG
 	struct		dbg_line_t		{
 		Fvector	P0,P1;
@@ -40,6 +43,9 @@ public:
 	ref_rt						rt_Position;		// 64bit,	fat	(x,y,z,?)				(eye-space)
 	ref_rt						rt_Normal;			// 64bit,	fat	(x,y,z,hemi)			(eye-space)
 	ref_rt						rt_Color;			// 64/32bit,fat	(r,g,b,specular-gloss)	(or decompressed MET-8-8-8-8)
+
+	// EXT
+	ref_rt rt_SSLR_0;
 
 	// 
 	ref_rt						rt_Accumulator;		// 64bit		(r,g,b,specular)
@@ -105,6 +111,10 @@ private:
 	// Luminance
 	ref_shader					s_luminance;
 	float						f_luminance_adapt;
+
+	// EXT
+	ref_shader s_SSLR;
+	ref_geom g_SQ;
 
 	// Combine
 	ref_geom					g_combine;
@@ -185,6 +195,10 @@ public:
 	void						accum_reflected			(light* L);
 	void						phase_bloom				();
 	void						phase_luminance			();
+
+	// EXT
+	void phase_SSLR();
+
 	void						phase_combine			();
 	void						phase_pp				();
 
