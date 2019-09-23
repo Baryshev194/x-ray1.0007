@@ -156,6 +156,9 @@ void	CBlender_BmmD::Compile	(CBlender_Compile& C)
 		C.r_Sampler		("s_dn_b",	strconcat(sizeof(mask),mask,oB_Name,"_bump") );
 		C.r_Sampler		("s_dn_a",	strconcat(sizeof(mask),mask,oA_Name,"_bump") );
 
+		// EXT
+		C.r_Sampler		("s_puddles",	"shaders\\puddles",	false,	D3DTADDRESS_WRAP,	D3DTEXF_ANISOTROPIC,D3DTEXF_LINEAR,	D3DTEXF_ANISOTROPIC);
+
 		C.r_End			();
 		break;
 	case SE_R2_NORMAL_LQ: 		// deffer

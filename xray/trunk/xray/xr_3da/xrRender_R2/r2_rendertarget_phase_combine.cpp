@@ -20,7 +20,7 @@ void	CRenderTarget::phase_combine	()
 	}
 
 	// low/hi RTs
-	u_setrt				( rt_Generic_0,rt_Generic_1,0,HW.pBaseZB );
+	u_setrt				( rt_Generic_0,rt_Generic_1,0,0,HW.pBaseZB );
 	RCache.set_CullMode	( CULL_NONE );
 	RCache.set_Stencil	( FALSE		);
 
@@ -126,7 +126,7 @@ void	CRenderTarget::phase_combine	()
 
 	// Forward rendering
 	{
-		u_setrt							(rt_Generic_0,0,0,HW.pBaseZB);		// LDR RT
+		u_setrt							(rt_Generic_0,0,0,0,HW.pBaseZB);		// LDR RT
 		RCache.set_CullMode				(CULL_CCW);
 		RCache.set_Stencil				(FALSE);
 		RCache.set_ColorWriteEnable		();
@@ -144,7 +144,7 @@ void	CRenderTarget::phase_combine	()
 	{
 		if		((0==RImplementation.mapDistort.size()) && !_menu_pp)		bDistort= FALSE;
 		if (bDistort)		{
-			u_setrt						(rt_Generic_1,0,0,HW.pBaseZB);		// Now RT is a distortion mask
+			u_setrt						(rt_Generic_1,0,0,0,HW.pBaseZB);		// Now RT is a distortion mask
 			RCache.set_CullMode			(CULL_CCW);
 			RCache.set_Stencil			(FALSE);
 			RCache.set_ColorWriteEnable	();
@@ -162,7 +162,7 @@ void	CRenderTarget::phase_combine	()
 	phase_SSLR();
 
 	// Combine everything + perform AA
-	if		(PP_Complex)	u_setrt		( rt_Color,0,0,HW.pBaseZB );			// LDR RT
+	if		(PP_Complex)	u_setrt		( rt_Color,0,0,0,HW.pBaseZB );			// LDR RT
 	else					u_setrt		( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
 	//. u_setrt				( Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
 	RCache.set_CullMode		( CULL_NONE )	;
@@ -338,7 +338,7 @@ void CRenderTarget::phase_wallmarks		()
 	// Targets
 	RCache.set_RT(NULL,2);
 	RCache.set_RT(NULL,1);
-	u_setrt								(rt_Color,NULL,NULL,HW.pBaseZB);
+	u_setrt								(rt_Color,NULL,NULL,NULL,HW.pBaseZB);
 	// Stencil	- draw only where stencil >= 0x1
 	RCache.set_Stencil					(TRUE,D3DCMP_LESSEQUAL,0x01,0xff,0x00);
 	RCache.set_CullMode					(CULL_CCW);
