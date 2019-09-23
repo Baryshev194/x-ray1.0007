@@ -1,0 +1,81 @@
+alpet:
+Прежние функции texture_from_visual и texture_to_visual теперь работают напрямую с параметрами IRender_Visual*, а для использования с объектами назначены функции texture_from_object и texture_to_object.
+Полный список экспорта в скрипты для этой ревизии:
+
+
+
+ CTexture		*texture_from_visual (IRender_Visual* v, int n_texture)   	 	== CTexture * IRender_Visual:get_texture(int n_texture)
+void 		texture_to_visual (IRender_Visual* v, string replace)  		== void IRender_Visual:set_texture_name(string replace)
+
+IRender_Visual* 	IRender_Visual:child(int n_child)
+void		IRender_Visual:configure(string new_shader, string new_texture)
+string		IRender_Visual:get_shader_name() 
+string		IRender_Visual:get_texture_name() 
+void		IRender_Visual:set_shader_name(string new_shader) 	
+
+CTexture 		*texture_from_object (game_object script_obj, int n_child, int n_texture) 
+void 		texture_to_object (game_object script_obj, int n_child, string texture_name) 
+
+CTexture 		*texture_create(string texture_name)
+void		texture_delete(CTexture *t)
+CTexture		*texture_find(string texture_name)
+void		texture_load (CTexture *t) 				== void CTexture:load ()
+void		texture_reload (CTexture *t) 				== void CTexture:reload ()
+void		texture_unload (CTexture *t) 				== void CTexture:unload ()
+string		texture_get_name(CTexture *t)			== string CTexture:get_name ()
+void		texture_set_name(CTexture *t, string name)		== string CTexture:set_name (string name)
+
+ При работе с данными функциями важно отличать номер текстуры от номера потомка визуала!
+
+-- работает только для потомков класса CWeapon:
+IRender_Visual   game_object:get_hud_visual()   
+void	           game_object:load_hud_visual (string wpn_hud_section)
+
+[game_object == CScriptGameObject*]
+
+Тестовый сценарий:
+
+function wprintf(msg, ...)
+ if ODS then
+    ODS( string.format (msg,...) ) 
+ end
+end
+
+  local suffix = string.format("|%d", obj:id())
+  local vname = obj:get_visual_name()
+  if nil == strpos(vname, "|") then
+     obj:set_visual_name(vname..suffix) -- сделать объект визуала уникальным    
+  end 
+  
+  for i = 0, 15 do
+      local tex = texture_from_object(obj, 0, i) -- получение объекта текстуры для 1-го потомка
+      if tex then
+         local tname = tex:get_name() or "nope"             
+         wprintf(" texture~C0E %02d~C0B =~C0D %s~C0A %s~C07, ref_count =~C0D %d~C07 ", i, FormatPtr (ReadPtr(tex)), tname, tex.ref_count)
+         if i == 0 then
+         
+            if nil == strpos(tname, "_light") then                 
+              tname = tname.."_light"
+              obj:load_hud_visual("wpn_fn2000_hud"..suffix) -- сделать объект визуала худа уникальным            
+            end
+                             
+            wprintf(" updating texture name to~C0A %s~C07 ", tname)            
+            texture_to_object(obj, 0, tname) -- для первого потомка визуала (без аддонов к оружию этого хватает)                           
+                        
+            local vis = obj:get_hud_visual()
+            if vis then -- теперь можно поменять текстуру выделенному объекту визуала
+               local c = vis:child(0)               
+               local s = c:get_texture_name()
+               
+               if nil == strpos(s, "_light") then  
+                  wprintf(" before update hud texture name =~C0F %s~C07 ", s or 'nil')
+                  c:set_texture_name (tname) -- for 1st child
+                  wprintf(" after  update hud texture name =~C0F %s~C07 ", c:get_texture_name() or 'nil')
+               end   
+            end
+         end  
+      else   
+         break
+      end         
+  end   
+  

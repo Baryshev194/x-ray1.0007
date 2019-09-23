@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- Red_Virus -->
+<window>
+
+	<quick_slot_panel x="0" y="450" width="240" height="100">
+		<quick_slot_panel_background x="0" y="0" width="240" height="100" stretch="1">
+			<texture>ui\ui_dg_time</texture>
+		</quick_slot_panel_background>
+
+		<image_static_quick_slot_0 x="0"   y="20" width="60" height="60"/>
+		<image_static_quick_slot_1 x="60"  y="20" width="60" height="60"/>
+		<image_static_quick_slot_2 x="120" y="20" width="60" height="60"/>
+		<image_static_quick_slot_3 x="180" y="20" width="60" height="60"/>
+
+		<count_item_quick_slot_0_text x="5" y="25" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</count_item_quick_slot_0_text>
+		
+		<count_item_quick_slot_1_text x="65" y="25" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</count_item_quick_slot_1_text>
+		
+		<count_item_quick_slot_2_text x="125" y="25" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</count_item_quick_slot_2_text>
+		
+		<count_item_quick_slot_3_text x="185" y="25" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</count_item_quick_slot_3_text>
+		
+		<use_quick_slot_0_text x="5" y="57" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</use_quick_slot_0_text>
+		
+		<use_quick_slot_1_text x="65" y="57" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</use_quick_slot_1_text>
+		
+		<use_quick_slot_2_text x="125" y="57" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</use_quick_slot_2_text>
+		
+		<use_quick_slot_3_text x="185" y="57" width="60" height="18">
+			<texture a="200" width="23" height="16">ui\ui_dg_time</texture>
+			<text x="5" y="0" font="letterica18" r="240" g="217" b="182"></text>
+		</use_quick_slot_3_text>
+	</quick_slot_panel>
+</window>
