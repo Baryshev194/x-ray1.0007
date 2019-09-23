@@ -1,0 +1,7 @@
+function sleep(Msec)
+	get_console():execute("sleep Msec "..tostring(Msec))
+end
+
+function wait(Msec)
+	get_console():execute("wait Msec "..tostring(Msec))
+end
