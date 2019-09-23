@@ -46,6 +46,7 @@ public:
 
 	// EXT
 	ref_rt rt_SSLR_0;
+	ref_rt rt_SSLR_1;
 
 	// 
 	ref_rt						rt_Accumulator;		// 64bit		(r,g,b,specular)

@@ -19,5 +19,15 @@ void CBlender_SSLR::Compile(CBlender_Compile& C)
 		C.r_Sampler_clf("s_image", r2_RT_generic0);
 		C.r_End();
 		break;
+	case 1:
+		C.r_Pass("null", "gauss5", FALSE, FALSE, FALSE);
+		C.r_Sampler_clf("s_image", r2_RT_SSLR0);
+		C.r_End();
+		break;
+	case 2:
+		C.r_Pass("null", "gauss5", FALSE, FALSE, FALSE);
+		C.r_Sampler_clf("s_image", r2_RT_SSLR1);
+		C.r_End();
+		break;
 	}
 }

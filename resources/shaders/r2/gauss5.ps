@@ -1,0 +1,29 @@
+#include "common.h"
+
+struct SQ
+{
+	float4 hpos:POSITION;
+	float2 tc0:TEXCOORD0;
+};
+
+static const float weights[3] = 
+{
+	0.29411764705882354,
+	0.35294117647058826,
+	0.35294117647058826
+};
+
+uniform float4 blur_params; // xy - direction, zw - resolution
+
+///////////////////////////////////////////////////////////////////
+// pixel
+float4 main(SQ IST):COLOR
+{
+	float4 col = float4(0,0,0,0);
+	float2 off = (float2)1.3333333333333333 * blur_params.xy;
+	float2 tc = IST.tc0;
+	col += tex2D(s_image,tc)*weights[0];
+	col += tex2D(s_image,tc + (off/blur_params.zw))*weights[1];
+	col += tex2D(s_image,tc - (off/blur_params.zw))*weights[2];
+	return col;
+}

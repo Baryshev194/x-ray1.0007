@@ -8,6 +8,7 @@
 
 // EXT
 #define r2_RT_SSLR0 "$user$SSLR0"
+#define r2_RT_SSLR1 "$user$SSLR1"
 
 // other
 #define		r2_RT_accum			"$user$accum"			// ---	16 bit fp or 16 bit fx

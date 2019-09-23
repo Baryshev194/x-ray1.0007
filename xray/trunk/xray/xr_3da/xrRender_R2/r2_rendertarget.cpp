@@ -341,6 +341,7 @@ CRenderTarget::CRenderTarget		()
 
 		// SSLR
 		rt_SSLR_0.create(r2_RT_SSLR0, Device.dwWidth, Device.dwHeight, D3DFMT_A8R8G8B8);
+		rt_SSLR_1.create(r2_RT_SSLR1, Device.dwWidth, Device.dwHeight, D3DFMT_A8R8G8B8);
 		s_SSLR.create(b_SSLR, "r2\\SSLR");
 	}
 

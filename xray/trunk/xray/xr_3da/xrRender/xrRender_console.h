@@ -99,6 +99,8 @@ extern ECORE_API int			ps_r2_wait_sleep;
 
 // EXT
 extern ECORE_API float ps_ext_SSLR_L;
+extern ECORE_API float ps_ext_SSLR_error;
+extern ECORE_API float ps_ext_SSLR_blur;
 
 enum
 {

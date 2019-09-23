@@ -2,7 +2,7 @@
 
 uniform float4x4 m_inv_v:
 register
-(ps,c3);
+(ps,c3); 
 
 struct SQ
 {
@@ -23,10 +23,11 @@ float3 getWnorm(float2 tc)
 	float3 norm = tex2D(s_normal,tc).xyz;
 	float3 Wnorm = mul(m_inv_v,float4(norm,0.f)).xyz;
 	Wnorm.y *= clamp(posZ,1.f,10.f);
+	Wnorm = normalize(Wnorm);
 	return Wnorm;
 }
 
-uniform float4 SSLR_params; // x - L, yzw - 
+uniform float4 SSLR_params; // x - L, y - error, zw - 1.f
 
 ///////////////////////////////////////////////////////////////////
 // pixel
@@ -38,26 +39,33 @@ float4 main(SQ IST):COLOR
 	float3 eye = normalize(pos - eye_position);
 	float fresnel = saturate(pow(1 - dot(-1 * eye, norm),1));
 	
-	float3 refl = normalize(reflect(eye,normalize(norm)));
+	float3 refl = normalize(reflect(eye,norm));
 	
 	float2 refl_tc = float2(0.f,0.f);
 	float L = SSLR_params.x;
+//	float sample_depth = 0.f;
+//	float depth = 0.f;
 	for (int i = 0; i < 6; i++)
 	{
 		float3 Npos = pos.xyz + refl*L;
 		
 		float4 Npos_proj = mul(m_VP,float4(Npos,1.f));
+//		sample_depth = Npos_proj.z;
 		Npos_proj.xyz /= Npos_proj.w;
 		float2 sample_tc = float2(0.f,0.f);
 		sample_tc.x = (Npos_proj.x + 1.f) * .5f;
 		sample_tc.y = 1.f - ((Npos_proj.y + 1.f) * .5f);
 		
 		float3 Hpos = getWpos(sample_tc);
+//		depth = Hpos.z;
 		L = length(Hpos-pos);
 		refl_tc = sample_tc;
 	}
 	
+//	float error = abs(depth - sample_depth) < SSLR_params.y ? 1 : 0;
+	
 	float3 img = tex2D(s_image,refl_tc);
 	img *= fresnel;
+//	img *= error;
 	return float4(img,1);
 }

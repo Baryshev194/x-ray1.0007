@@ -111,6 +111,8 @@ float		ps_r2_slight_fade			= 1.f;				// 1.f
 
 // EXT
 float ps_ext_SSLR_L = 1.f;
+float ps_ext_SSLR_error = .5f;
+float ps_ext_SSLR_blur = 1.f;
 
 // KD start
 Flags32		ps_common_flags				= { 0 };		// r1-only
@@ -446,6 +448,8 @@ void		xrRender_initconsole	()
 
 	// EXT
 	CMD4(CCC_Float, "ext_SSLR_L", &ps_ext_SSLR_L, .1f, 10.f);
+	CMD4(CCC_Float, "ext_SSLR_error", &ps_ext_SSLR_error, .1f, 10.f);
+	CMD4(CCC_Float, "ext_SSLR_blur", &ps_ext_SSLR_blur, .1f, 5.f);
 
 	// KD
 	CMD3(CCC_Mask,			"r__bloodmarks",		&ps_common_flags,			RFLAG_BLOODMARKS);
