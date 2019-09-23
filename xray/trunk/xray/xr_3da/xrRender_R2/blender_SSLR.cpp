@@ -3,10 +3,10 @@
 
 #include "Blender_SSLR.h"
 
-CBlender_SSLR::CBlender_SSLR() { descriptions.CLS = 0; }
+CBlender_SSLR::CBlender_SSLR() { description.CLS = 0; }
 CBlender_SSLR::~CBlender_SSLR() {}
 
-void CBlender_SSLR::Copile(CBlender_Compile& C)
+void CBlender_SSLR::Compile(CBlender_Compile& C)
 {
 	IBlender::Compile(C);
 
